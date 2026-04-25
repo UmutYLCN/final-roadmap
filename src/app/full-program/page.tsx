@@ -1,0 +1,550 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ChevronLeft, FileText, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+const CONTENT = `Evet, tarih aralığını 25 Nisan–8 Haziran olarak yeniden düzenliyorum. Bu daha iyi bir senaryo: 18 günlük sıkıştırılmış plandan 45 günlük kontrollü, tekrar döngülü, yüksek net hedefli bir plana geçiyoruz.
+
+Aşağıdaki plan 25 Nisan Cumartesi başlayıp 8 Haziran Pazartesi biter. Tablo yok. Her gün konu, sayfa yer tutucusu, soru tipi, tekrar ve “What you must have mastered today” var.
+
+**Ana Çalışma Sistemi**
+
+Günlük standart blok:
+
+Sabah: 09.00–12.00 yeni konu öğrenme, aktif not çıkarma, örnek çözüm analizi.  
+Öğlen: 13.00–16.00 yoğun soru çözümü.  
+Akşam: 17.30–19.30 yanlış defteri, active recall, Feynman tekniği.  
+Gece: 21.00–22.00 kısa tekrar, formül/teorem/devre şeması hatırlama.
+
+Her gün minimum hedef: normal günlerde 80–120 soru/alt-soru, revision günlerinde 60–90 kaliteli tekrar sorusu, mock günlerinde sınav + analiz.
+
+Yanlış defteri zorunlu: Her yanlış için konu, hata nedeni, doğru yöntem, tekrar tarihi yazılacak.  
+Active recall zorunlu: Konu kapandıktan sonra kitaba bakmadan tanım, yöntem, formül ve karar ağacı yazılacak.  
+Spaced repetition zorunlu: Her gün dünkü konu, 3 gün önceki konu ve 7 gün önceki konu kısa tekrar edilecek.  
+Feynman tekniği zorunlu: Her gün en zor 1–2 konuyu basit dille yazılı anlatacaksın.  
+Bölüm sonu soruları zorunlu: İlgili konu bittiği gün “ALL end-of-chapter problems” çözülecek veya plandaki revision gününde tamamlanacak.
+
+**Kapsam Haritası**
+
+Calculus 2: Sonsuz diziler, sonsuz seriler, yakınsaklık testleri, alterne seriler, mutlak/şartlı yakınsaklık, kuvvet serileri, Taylor/Maclaurin, parametrik denklemler, kutupsal koordinatlar, vektörler, uzayda doğrular/düzlemler, uzay eğrileri, çok değişkenli fonksiyonlar, limit/süreklilik, kısmi türevler, zincir kuralı, gradyan, yönlü türev, teğet düzlem, lineerleştirme, ekstremum, iki katlı integraller, kutupsal dönüşüm, üç katlı integraller, silindirik/küresel koordinatlar.
+
+Physics 2: Elektrik yükü, Coulomb yasası, elektrik alan, Gauss yasası, elektrik potansiyel, kapasitans, dielektrikler, akım, direnç, EMK, DC devreleri, manyetik alan, manyetik kuvvet, manyetik alan kaynakları, Biot-Savart, Ampere, indüksiyon, Faraday-Lenz, indüktans, AC devreleri, elektromanyetik dalgalar.
+
+Digital Logic Design: Sayı sistemleri, sayı kodları, Boolean cebiri, Boolean fonksiyonlar, kanonik gösterimler, Karnaugh haritası, don’t care, NAND/NOR gerçeklemesi, kombinasyonel devreler, toplayıcı/çıkarıcı, çarpıcı, karşılaştırıcı, decoder, encoder, MUX/DEMUX, latch, flip-flop, sıralı devre analizi, sıralı devre tasarımı, register, sayıcılar, RAM/ROM, hafıza kodlama, register transfer seviyesi, kontrol mantığı, bellek organizasyonu.
+
+**Day 1 — 25 Nisan Cumartesi**
+
+Calculus 2: Sonsuz diziler; yakınsaklık, ıraksaklık, dizi limiti, sıkışma teoremi, monoton sınırlı diziler. [Calculus Book p.1–45]  
+Soru: 35 problem solving, 10 conceptual, 5 proof-style.  
+Day 1: Solve ALL end-of-chapter problems for Sequences / Chapter 11.1 [Calculus Book p.46–55].  
+Physics 2: Elektrik yükü ve Coulomb yasası; noktasal yükler, süperpozisyon, vektörel kuvvet. [Physics Notes 1 p.1–20]  
+Soru: 25 problem solving, 8 conceptual.  
+DLD: Sayı sistemleri; binary, decimal, octal, hexadecimal, taban dönüşümleri. [DLD Book p.1–30]  
+Soru: 40 kısa işlem sorusu.  
+Revision: 30 dakika dizi limitleri, 20 dakika Coulomb yön analizi, 20 dakika taban dönüşümü.  
+What you must have mastered today: Dizi limitini test etmek, Coulomb kuvvetini vektörel kurmak, taban dönüşümlerini hatasız yapmak.
+
+**Day 2 — 26 Nisan Pazar**
+
+Calculus 2: Dizi limitlerinde özel teknikler; rasyonel ifadeler, köklü ifadeler, trigonometrik diziler, e tabanlı limitler. [Calculus Book p.56–80]  
+Soru: 45 problem solving.  
+Physics 2: Coulomb yasasında çoklu yük sistemleri ve denge soruları. [Physics Notes 1 p.21–35]  
+Soru: 30 problem solving.  
+DLD: İşaretli sayılar; signed magnitude, 1’s complement, 2’s complement, overflow. [DLD Book p.31–55]  
+Soru: 45 conversion/arithmetic.  
+Revision: Day 1 yanlışları yeniden çöz.  
+What you must have mastered today: Limit formu tanımak, elektrik kuvvetinde bileşen ayırmak, 2’s complement ile toplama/çıkarma.
+
+**Day 3 — 27 Nisan Pazartesi — Revision Günü**
+
+Calculus 2: Sonsuz diziler tam tekrar. Monotonluk, sınırlılık, squeeze, limit kuralları. [Calculus Book p.1–80]  
+Soru: 50 mixed sequence problem.  
+Physics 2: Elektrik yükü ve Coulomb genel tekrar. [Physics Notes 1 p.1–35]  
+Soru: 25 mixed problem.  
+DLD: Sayı sistemleri genel tekrar. [DLD Book p.1–55]  
+Soru: 50 işlem sorusu.  
+Revision: Active recall ile üç dersin ilk konu özetini kitaba bakmadan yaz.  
+What you must have mastered today: İlk üç temel konuyu sınav temposunda çözmek.
+
+**Day 4 — 28 Nisan Salı**
+
+Calculus 2: Sonsuz serilere giriş; geometrik seri, yakınsaklık toplamı, n. terim testi. [Calculus Book p.81–115]  
+Soru: 40 problem solving, 10 conceptual.  
+Day 4: Solve ALL end-of-chapter problems for Infinite Series / Chapter 11.2–11.3 [Calculus Book p.116–130].  
+Physics 2: Elektrik alan; noktasal yük alanı, alan çizgileri, süperpozisyon. [Physics Notes 2 p.1–20]  
+Soru: 30 problem solving.  
+DLD: Sayı kodları; BCD, Gray code, Excess-3, ASCII mantığı. [DLD Book p.56–85]  
+Soru: 35 code conversion.  
+What you must have mastered today: Geometrik seri tanımak, elektrik alanı kuvvetten ayırmak, kod dönüşümleri.
+
+**Day 5 — 29 Nisan Çarşamba**
+
+Calculus 2: Pozitif terimli seriler; integral testi, p-serisi, harmonik seri. [Calculus Book p.131–165]  
+Soru: 45 test-selection problem.  
+Physics 2: Sürekli yük dağılımlarında elektrik alan; çubuk, halka, disk. [Physics Notes 2 p.21–45]  
+Soru: 30 integral kurmalı problem.  
+DLD: Boolean cebiri; temel teoremler, De Morgan, duality, sadeleştirme. [DLD Book p.86–120]  
+Soru: 45 simplification.  
+Revision: Day 2 konularından 30 dakika spaced repetition.  
+What you must have mastered today: Integral testi koşulları, elektrik alan integrali kurmak, Boolean cebiriyle sadeleştirme.
+
+**Day 6 — 30 Nisan Perşembe — Revision Günü**
+
+Calculus 2: Karşılaştırma ve limit karşılaştırma testleri. [Calculus Book p.166–195]  
+Soru: 45 problem solving.  
+Physics 2: Elektrik alan tekrar ve zor simetri soruları. [Physics Notes 2 p.1–45]  
+Soru: 35 mixed field problem.  
+DLD: Boolean cebiri ve kodlar tekrar. [DLD Book p.56–120]  
+Soru: 45 mixed.  
+Revision: Yanlış defteri ilk kontrol. Tekrar eden hata tiplerini işaretle.  
+What you must have mastered today: Seri testini doğru seçmek, elektrik alan yönünü doğru kurmak, Boolean ifadeyi minimal hale getirmek.
+
+**Day 7 — 1 Mayıs Cuma**
+
+Calculus 2: Oran testi ve kök testi. Hangi seride hangi test hızlı sonuç verir? [Calculus Book p.196–225]  
+Soru: 50 problem solving.  
+Day 7: Solve ALL end-of-chapter problems for Positive Series Tests / Chapter 11.4–11.5 [Calculus Book p.226–250].  
+Physics 2: Gauss yasasına giriş; elektrik akısı, Gauss yüzeyi, simetri seçimi. [Physics Notes 3 p.1–20]  
+Soru: 25 conceptual, 15 problem solving.  
+DLD: Boolean fonksiyonlar; doğruluk tablosu, minterm, maxterm, SOP, POS. [DLD Book p.121–160]  
+Soru: 45 expression/table problem.  
+What you must have mastered today: Oran/kök testini hızlı uygulamak, Gauss yüzeyi seçmek, kanonik form yazmak.
+
+**Day 8 — 2 Mayıs Cumartesi**
+
+Calculus 2: Alterne seriler; Leibniz testi, hata tahmini, mutlak ve şartlı yakınsaklık. [Calculus Book p.251–290]  
+Soru: 45 problem solving, 10 conceptual.  
+Day 8: Solve ALL end-of-chapter problems for Alternating Series / Chapter 11.6 [Calculus Book p.291–310].  
+Physics 2: Gauss yasası uygulamaları; küre, silindir, sonsuz düzlem, iletkenler. [Physics Notes 3 p.21–50]  
+Soru: 35 problem solving.  
+DLD: Kanonik gösterimler ve fonksiyon dönüşümleri. [DLD Book p.161–190]  
+Soru: 40 SOP/POS.  
+What you must have mastered today: Şartlı/mutlak yakınsaklık ayrımı, Gauss yasasıyla alan bulmak, minterm/maxterm dönüşümü.
+
+**Day 9 — 3 Mayıs Pazar — Mini Mock 1**
+
+Calculus mock: Diziler ve seriler, 90 dakika, 20 soru.  
+Physics mock: Coulomb, elektrik alan, Gauss, 75 dakika, 15 soru.  
+DLD mock: Sayı sistemleri, kodlar, Boolean, kanonik formlar, 75 dakika, 25 soru.  
+Analiz: Her yanlış için yanlış defterine hata sınıfı yaz.  
+Weakness check: Seri testi seçimi, Gauss simetri seçimi, SOP/POS dönüşümü zayıf kalabilir. Her birinden 10 ek soru çöz.  
+What you must have mastered today: İlk haftanın konularını süre baskısıyla çözmek.
+
+**Day 10 — 4 Mayıs Pazartesi**
+
+Calculus 2: Kuvvet serileri; yakınsaklık yarıçapı, yakınsaklık aralığı, uç nokta testi. [Calculus Book p.311–355]  
+Soru: 50 problem solving.  
+Day 10: Solve ALL end-of-chapter problems for Power Series / Chapter 11.7 [Calculus Book p.356–375].  
+Physics 2: Elektrik potansiyel; potansiyel enerji, noktasal yüklerde V, E-V ilişkisi. [Physics Notes 4 p.1–25]  
+Soru: 35 problem solving.  
+DLD: Karnaugh haritası; 2, 3, 4 değişkenli K-map. [DLD Book p.191–230]  
+Soru: 50 K-map.  
+What you must have mastered today: Power series aralığı bulmak, potansiyel hesabı yapmak, K-map gruplamak.
+
+**Day 11 — 5 Mayıs Salı**
+
+Calculus 2: Kuvvet serilerinde işlemler; terim terime türev, terim terime integral, fonksiyon temsili. [Calculus Book p.376–410]  
+Soru: 45 problem solving.  
+Physics 2: Sürekli yüklerde potansiyel; halka, çubuk, disk, potansiyelden alan. [Physics Notes 4 p.26–50]  
+Soru: 30 problem solving.  
+DLD: Don’t care koşulları ve K-map optimizasyonu. [DLD Book p.231–255]  
+Soru: 45 minimization.  
+Revision: Mini Mock 1 yanlışlarının ilk tekrarı.  
+What you must have mastered today: Seriyle fonksiyon yazmak, potansiyel integrali kurmak, don’t care kullanmak.
+
+**Day 12 — 6 Mayıs Çarşamba — Revision Günü**
+
+Calculus 2: Diziler, seriler, power series genel tekrar. [Calculus Book p.1–410]  
+Soru: 70 mixed.  
+Physics 2: Elektrostatik genel tekrar. [Physics Notes 1–4]  
+Soru: 45 mixed.  
+DLD: Boolean + K-map genel tekrar. [DLD Book p.1–255]  
+Soru: 60 mixed.  
+What you must have mastered today: İlk büyük bloktaki tüm testleri ve sadeleştirmeleri karıştırmadan seçmek.
+
+**Day 13 — 7 Mayıs Perşembe**
+
+Calculus 2: Taylor ve Maclaurin serileri; temel seriler, Taylor polinomu. [Calculus Book p.411–455]  
+Soru: 50 problem solving.  
+Physics 2: Kapasitans; paralel levha, seri/paralel kapasitör, enerji. [Physics Notes 5 p.1–25]  
+Soru: 35 problem solving.  
+DLD: NAND/NOR gerçeklemesi. [DLD Book p.256–285]  
+Soru: 40 gate-level design.  
+What you must have mastered today: Temel Taylor serilerini üretmek, eşdeğer kapasitans bulmak, NAND/NOR devre çizmek.
+
+**Day 14 — 8 Mayıs Cuma**
+
+Calculus 2: Taylor hata tahmini, seriyle limit ve seriyle integral. [Calculus Book p.456–500]  
+Soru: 55 problem solving.  
+Day 14: Solve ALL end-of-chapter problems for Taylor Series / Chapter 11.8–11.10 [Calculus Book p.501–530].  
+Physics 2: Dielektrikler; dielektrik sabiti, enerji, alan etkisi. [Physics Notes 5 p.26–45]  
+Soru: 25 problem solving, 10 conceptual.  
+DLD: Kombinasyonel devrelere giriş; analiz ve tasarım akışı. [DLD Book p.286–315]  
+Soru: 35 design/analysis.  
+What you must have mastered today: Taylor’ı limit/integralde kullanmak, dielektrik etkisini yorumlamak, kombinasyonel devre tasarım akışı.
+
+**Day 15 — 9 Mayıs Cumartesi — Revision Günü**
+
+Calculus 2: Taylor + power series hedefli tekrar.  
+Soru: 60 mixed.  
+Physics 2: Potansiyel + kapasitör tekrar.  
+Soru: 45 mixed.  
+DLD: K-map + NAND/NOR + combinational tekrar.  
+Soru: 60 mixed.  
+What you must have mastered today: Seri konularında sınav seviyesine yaklaşmak.
+
+**Day 16 — 10 Mayıs Pazar — Mini Mock 2**
+
+Calculus mock: Seriler ve Taylor, 120 dakika, 25 soru.  
+Physics mock: Elektrostatik + kapasitör, 100 dakika, 18 soru.  
+DLD mock: Boolean, K-map, NAND/NOR, combinational, 100 dakika, 30 soru.  
+Weakness check: Taylor hata tahmini, dielektrik yorumları, don’t care optimizasyonu zayıf kalabilir. Her birinden 10 ek soru çöz.  
+What you must have mastered today: İlk iki haftanın konularını sınav formatında yönetmek.
+
+**Day 17 — 11 Mayıs Pazartesi**
+
+Calculus 2: Parametrik denklemler; eğri, teğet, hız, yay uzunluğu. [Calculus Book p.531–575]  
+Soru: 45 problem solving.  
+Physics 2: Akım, direnç, EMK; Ohm yasası, güç, iç direnç. [Physics Notes 6 p.1–25]  
+Soru: 35 problem solving.  
+DLD: Toplayıcılar; half adder, full adder, ripple carry. [DLD Book p.316–345]  
+Soru: 40 design.  
+What you must have mastered today: Parametrik eğride türev almak, devrede güç hesabı, full adder tasarlamak.
+
+**Day 18 — 12 Mayıs Salı**
+
+Calculus 2: Kutupsal koordinatlar; polar grafikler, alan, polar yay uzunluğu. [Calculus Book p.576–625]  
+Soru: 50 problem solving.  
+Day 18: Solve ALL end-of-chapter problems for Parametric and Polar Coordinates / Chapter 10 [Calculus Book p.626–655].  
+Physics 2: DC devrelerine giriş; seri/paralel direnç, Kirchhoff kuralları. [Physics Notes 7 p.1–25]  
+Soru: 35 circuit problem.  
+DLD: Çıkarıcılar ve overflow. [DLD Book p.346–370]  
+Soru: 35 design/analysis.  
+What you must have mastered today: Polar alan kurmak, Kirchhoff denklemi yazmak, çıkarıcı tasarlamak.
+
+**Day 19 — 13 Mayıs Çarşamba — Revision Günü**
+
+Calculus 2: Parametrik + polar tekrar.  
+Soru: 60 mixed.  
+Physics 2: Akım, direnç, DC devre tekrar.  
+Soru: 45 mixed circuit.  
+DLD: Adder/subtractor tekrar.  
+Soru: 45 mixed.  
+What you must have mastered today: Denklemden grafiğe, grafikten integrale geçmek.
+
+**Day 20 — 14 Mayıs Perşembe**
+
+Calculus 2: Vektörler; 3B koordinatlar, büyüklük, birim vektör, nokta çarpım. [Calculus Book p.656–700]  
+Soru: 40 problem solving.  
+Physics 2: RC devreleri; şarj/deşarj, zaman sabiti, grafik yorumlama. [Physics Notes 7 p.26–50]  
+Soru: 35 problem solving.  
+DLD: Çarpıcılar ve karşılaştırıcılar. [DLD Book p.371–405]  
+Soru: 40 design/analysis.  
+What you must have mastered today: Dot product yorumlamak, RC zaman sabiti kullanmak, comparator tasarlamak.
+
+**Day 21 — 15 Mayıs Cuma**
+
+Calculus 2: Çapraz çarpım, paralellik, diklik, alan, moment yorumu. [Calculus Book p.701–735]  
+Soru: 45 problem solving.  
+Physics 2: DC devreleri ileri seviye; çok döngülü devreler, ölçüm cihazları. [Physics Notes 7 p.51–75]  
+Soru: 35 circuit problem.  
+DLD: Decoder, encoder, priority encoder. [DLD Book p.406–435]  
+Soru: 40 design/analysis.  
+What you must have mastered today: Cross product yönü, çok döngülü devre çözmek, decoder/encoder ayrımı.
+
+**Day 22 — 16 Mayıs Cumartesi — Revision Günü**
+
+Calculus 2: Vektörler ve polar tekrar.  
+Soru: 60 mixed.  
+Physics 2: DC devreleri tam tekrar.  
+Soru: 50 mixed circuit.  
+DLD: Aritmetik devreler + decoder tekrar.  
+Soru: 60 mixed.  
+What you must have mastered today: Fizikte devre denklem sistemi kurmak, DLD’de blok seçmek.
+
+**Day 23 — 17 Mayıs Pazar — Mini Mock 3**
+
+Calculus mock: Parametrik, polar, vektörler, 120 dakika, 24 soru.  
+Physics mock: Akım, direnç, DC, RC, 100 dakika, 18 soru.  
+DLD mock: Combinational circuits, 100 dakika, 30 soru.  
+Weakness check: Polar yay uzunluğu, Kirchhoff işaretleri, encoder/MUX seçimi zayıf kalabilir.  
+What you must have mastered today: Orta dönem konularını sınav baskısıyla çözmek.
+
+**Day 24 — 18 Mayıs Pazartesi**
+
+Calculus 2: Uzayda doğrular ve düzlemler; parametrik/simetrik doğru denklemleri, düzlem denklemi. [Calculus Book p.736–785]  
+Soru: 50 problem solving.  
+Physics 2: Manyetik alan ve manyetik kuvvet; Lorentz kuvveti, sağ el kuralı. [Physics Notes 9 p.1–25]  
+Soru: 35 problem solving.  
+DLD: MUX/DEMUX; MUX ile Boolean fonksiyon gerçekleştirme. [DLD Book p.436–470]  
+Soru: 45 design.  
+What you must have mastered today: 3B doğru/düzlem kurmak, manyetik kuvvet yönü, MUX ile fonksiyon kurmak.
+
+**Day 25 — 19 Mayıs Salı**
+
+Calculus 2: Uzay eğrileri; teğet vektör, hız, ivme, yay uzunluğu. [Calculus Book p.786–830]  
+Soru: 45 problem solving.  
+Day 25: Solve ALL end-of-chapter problems for Vectors, Lines, Planes, Space Curves / Chapters 12–13 [Calculus Book p.831–865].  
+Physics 2: Akım taşıyan tele kuvvet, tork, parçacık hareketi. [Physics Notes 9 p.26–55]  
+Soru: 35 problem solving.  
+DLD: Latch; SR latch, gated latch, D latch. [DLD Book p.471–500]  
+Soru: 35 timing/analysis.  
+What you must have mastered today: Uzay eğrisinde hız/ivme, manyetik kuvvet uygulamaları, latch davranışı.
+
+**Day 26 — 20 Mayıs Çarşamba — Revision Günü**
+
+Calculus 2: Vektörler, doğru/düzlem, uzay eğrileri tekrar.  
+Soru: 65 mixed.  
+Physics 2: Manyetik kuvvet tekrar.  
+Soru: 45 mixed.  
+DLD: MUX/DEMUX + latch tekrar.  
+Soru: 55 mixed.  
+What you must have mastered today: 3B geometri ve yön kurallarını karıştırmamak.
+
+**Day 27 — 21 Mayıs Perşembe**
+
+Calculus 2: Çok değişkenli fonksiyonlar; tanım kümesi, seviye eğrileri, seviye yüzeyleri. [Calculus Book p.866–900]  
+Soru: 35 conceptual/problem solving.  
+Physics 2: Manyetik alan kaynakları; Biot-Savart yasası. [Physics Notes 10 p.1–25]  
+Soru: 35 problem solving.  
+DLD: Flip-flop; SR, JK, D, T flip-flop, characteristic table. [DLD Book p.501–540]  
+Soru: 45 table/analysis.  
+What you must have mastered today: Çok değişkenli fonksiyonu görselleştirmek, Biot-Savart kurmak, flip-flop tabloları.
+
+**Day 28 — 22 Mayıs Cuma**
+
+Calculus 2: Çok değişkenli limit ve süreklilik; yol testi, limit yokluğu, temel limit teknikleri. [Calculus Book p.901–945]  
+Soru: 45 problem solving, 15 conceptual.  
+Physics 2: Ampere yasası; solenoid, toroid, simetrik akım dağılımları. [Physics Notes 10 p.26–55]  
+Soru: 35 problem solving.  
+DLD: Excitation table ve timing diagram. [DLD Book p.541–570]  
+Soru: 40 analysis.  
+What you must have mastered today: Çok değişkenli limitte yol seçmek, Ampere-Biot-Savart ayrımı, flip-flop geçişlerini okumak.
+
+**Day 29 — 23 Mayıs Cumartesi — Revision Günü**
+
+Calculus 2: Çok değişkenli limit/süreklilik tekrar.  
+Soru: 55 mixed.  
+Physics 2: Manyetik alan kaynakları tekrar.  
+Soru: 45 mixed.  
+DLD: Flip-flop tam tekrar.  
+Soru: 55 mixed.  
+What you must have mastered today: Limit yokluğunu kanıtlamak, manyetik alan yönünü bulmak, timing diagram çözmek.
+
+**Day 30 — 24 Mayıs Pazar — Mini Mock 4**
+
+Calculus mock: 3B geometri + çok değişkenli giriş, 120 dakika, 24 soru.  
+Physics mock: Manyetizma, 100 dakika, 18 soru.  
+DLD mock: MUX, latch, flip-flop, 100 dakika, 30 soru.  
+Weakness check: Çok değişkenli limit, Ampere simetri seçimi, excitation table zayıf kalabilir.  
+What you must have mastered today: Mayıs sonuna yaklaşırken üç derste de orta-ileri konuları çözmek.
+
+**Day 31 — 25 Mayıs Pazartesi**
+
+Calculus 2: Kısmi türevler; birinci türev, ikinci türev, karışık türev. [Calculus Book p.946–985]  
+Soru: 50 problem solving.  
+Physics 2: Elektromanyetik indüksiyon; Faraday yasası, Lenz yasası. [Physics Notes 11 p.1–30]  
+Soru: 40 problem solving.  
+DLD: Sıralı devre analizi; state table, state diagram. [DLD Book p.571–610]  
+Soru: 40 analysis.  
+What you must have mastered today: Kısmi türev almak, Lenz yönü, state diagram okumak.
+
+**Day 32 — 26 Mayıs Salı**
+
+Calculus 2: Zincir kuralı; iki/üç değişkenli fonksiyonlar, implicit differentiation. [Calculus Book p.986–1030]  
+Soru: 50 problem solving.  
+Day 32: Solve ALL end-of-chapter problems for Multivariable Functions and Partial Derivatives / Chapter 14.1–14.4 [Calculus Book p.1031–1060].  
+Physics 2: Hareket EMK’si ve indüksiyon uygulamaları. [Physics Notes 11 p.31–60]  
+Soru: 35 problem solving.  
+DLD: Sıralı devre tasarımı; state reduction, state assignment. [DLD Book p.611–650]  
+Soru: 40 design.  
+What you must have mastered today: Zincir kuralı şeması, indüksiyon yönü, sıralı devre tasarım akışı.
+
+**Day 33 — 27 Mayıs Çarşamba — Revision Günü**
+
+Calculus 2: Kısmi türev + zincir kuralı tekrar.  
+Soru: 65 mixed.  
+Physics 2: İndüksiyon tekrar.  
+Soru: 45 mixed.  
+DLD: Sequential analysis/design tekrar.  
+Soru: 55 mixed.  
+What you must have mastered today: Çok adımlı türev ve sıralı devrelerde yöntem disiplini.
+
+**Day 34 — 28 Mayıs Perşembe**
+
+Calculus 2: Gradyan ve yönlü türev; maksimum artış yönü, seviye eğrisiyle ilişki. [Calculus Book p.1061–1100]  
+Soru: 45 problem solving.  
+Physics 2: İndüktans; self/mutual inductance, RL devreleri, manyetik enerji. [Physics Notes 12 p.1–35]  
+Soru: 35 problem solving.  
+DLD: Register; shift register, parallel load, serial transfer. [DLD Book p.651–685]  
+Soru: 35 design/analysis.  
+What you must have mastered today: Gradyan yorumlamak, RL geçici rejim, register davranışı.
+
+**Day 35 — 29 Mayıs Cuma**
+
+Calculus 2: Teğet düzlem, normal doğru, lineerleştirme, diferansiyeller. [Calculus Book p.1101–1145]  
+Soru: 50 problem solving.  
+Physics 2: LC/RLC temel geçişleri ve enerji değişimi. [Physics Notes 12 p.36–60]  
+Soru: 30 problem solving.  
+DLD: Sayıcılar; asynchronous/synchronous, mod-n counters. [DLD Book p.686–725]  
+Soru: 45 design.  
+What you must have mastered today: Teğet düzlem kurmak, indüktör enerjisi, mod sayıcı tasarlamak.
+
+**Day 36 — 30 Mayıs Cumartesi — Revision Günü**
+
+Calculus 2: Gradyan, yönlü türev, teğet düzlem tekrar.  
+Soru: 65 mixed.  
+Physics 2: İndüksiyon + indüktans tekrar.  
+Soru: 50 mixed.  
+DLD: Register + counter tekrar.  
+Soru: 60 mixed.  
+What you must have mastered today: Türevsel çok değişkenli konularda sınav seviyesine çıkmak.
+
+**Day 37 — 31 Mayıs Pazar — Mini Mock 5**
+
+Calculus mock: Çok değişkenli türevler, 130 dakika, 25 soru.  
+Physics mock: İndüksiyon + indüktans, 100 dakika, 18 soru.  
+DLD mock: Sequential circuits, registers, counters, 110 dakika, 30 soru.  
+Weakness check: Lineerleştirme, RL zaman sabiti, synchronous counter tasarımı zayıf kalabilir.  
+What you must have mastered today: En zor orta-final bloğunu süreli çözmek.
+
+**Day 38 — 1 Haziran Pazartesi**
+
+Calculus 2: Ekstremum değerler; kritik noktalar, saddle point, ikinci türev testi. [Calculus Book p.1146–1190]  
+Soru: 50 problem solving.  
+Day 38: Solve ALL end-of-chapter problems for Gradient, Tangent Planes, Extrema / Chapter 14.5–14.10 [Calculus Book p.1191–1220].  
+Physics 2: Alternatif akım; RMS, fazör, direnç/kapasitör/indüktör AC davranışı. [Physics Notes 13 p.1–30]  
+Soru: 35 problem solving.  
+DLD: RAM, ROM, memory size, address/data line hesabı. [DLD Book p.726–765]  
+Soru: 40 problem solving.  
+What you must have mastered today: Kritik nokta sınıflandırmak, AC faz ilişkisi, bellek kapasitesi hesaplamak.
+
+**Day 39 — 2 Haziran Salı**
+
+Calculus 2: İki katlı integraller; dikdörtgen bölgeler, Fubini, hacim. [Calculus Book p.1221–1270]  
+Soru: 55 problem solving.  
+Physics 2: RLC devreleri, rezonans, güç faktörü. [Physics Notes 13 p.31–65]  
+Soru: 40 problem solving.  
+DLD: ROM ile fonksiyon gerçekleştirme, hafıza kodlama. [DLD Book p.766–800]  
+Soru: 35 design.  
+What you must have mastered today: Çift integral kurmak, RLC fazör çözmek, ROM tasarlamak.
+
+**Day 40 — 3 Haziran Çarşamba — Revision Günü**
+
+Calculus 2: Ekstremum + çift integral giriş tekrar.  
+Soru: 65 mixed.  
+Physics 2: AC devreleri tekrar.  
+Soru: 50 mixed.  
+DLD: Memory tekrar.  
+Soru: 55 mixed.  
+What you must have mastered today: Final öncesi son yeni konulara sağlam giriş yapmak.
+
+**Day 41 — 4 Haziran Perşembe**
+
+Calculus 2: Genel bölgelerde iki katlı integral; sınır değiştirme, alan, ortalama değer. [Calculus Book p.1271–1325]  
+Soru: 60 problem solving.  
+Physics 2: Elektromanyetik dalgalar; dalga hızı, enerji yoğunluğu, Poynting vektörü, spektrum. [Physics Notes 14 p.1–35]  
+Soru: 25 problem solving, 15 conceptual.  
+DLD: Register transfer seviyesi, microoperations, control signals. [DLD Book p.801–845]  
+Soru: 40 design/analysis.  
+What you must have mastered today: Bölge çizip integral sınırı kurmak, EM dalga temel bağıntıları, RTL kontrol mantığı.
+
+**Day 42 — 5 Haziran Cuma**
+
+Calculus 2: Kutupsal koordinatlarda çift integral, değişken dönüşümü. [Calculus Book p.1326–1370]  
+Soru: 55 problem solving.  
+Day 42: Solve ALL end-of-chapter problems for Double Integrals / Chapter 15.1–15.3 [Calculus Book p.1371–1400].  
+Physics 2: Physics 2 full topic revision, Notes 1–14.  
+Soru: 60 mixed final problem.  
+DLD: Bellek organizasyonu ve genel DLD tekrar. [DLD Book p.846–890]  
+Soru: 60 mixed.  
+What you must have mastered today: Polar dönüşüm, Physics final kapsamı, DLD bütünsel tekrar.
+
+**Day 43 — 6 Haziran Cumartesi — Full Revision + Exam Simulation**
+
+Calculus 2: Üç katlı integraller; kartezyen koordinatlar, hacim hesabı. [Calculus Book p.1401–1445]  
+Soru: 45 problem solving.  
+Physics full simulation: 120 dakika, tüm kapsam, 20 soru.  
+DLD full simulation: 120 dakika, tüm kapsam, 35 soru.  
+Revision: Simulation sonrası sadece yanlış konular.  
+What you must have mastered today: Physics ve DLD final temposunu tam yönetmek.
+
+**Day 44 — 7 Haziran Pazar — Full Revision + Exam Simulation**
+
+Calculus 2: Silindirik ve küresel koordinatlarda üç katlı integral. [Calculus Book p.1446–1500]  
+Soru: 60 problem solving.  
+Day 44: Solve ALL end-of-chapter problems for Triple Integrals / Chapter 15.4–15.6 [Calculus Book p.1501–1535].  
+Calculus full simulation: 150 dakika, tüm kapsam, 25–30 soru.  
+DLD weakness drill: En zayıf 3 başlıktan 15’er soru.  
+Physics weakness drill: En zayıf 3 başlıktan 10’ar soru.  
+What you must have mastered today: Koordinat sistemi seçimi, tam Calculus final temposu, zayıf konuları kapatma.
+
+**Day 45 — 8 Haziran Pazartesi — Final Consolidation**
+
+Sabah Calculus: Seri testleri, Taylor, polar, vektörler, çok değişkenli türevler, ekstremum, çift/üç katlı integraller.  
+Soru: 40 mixed high-yield.  
+Day 45: Solve ALL remaining end-of-chapter problems from Calculus 2. No exceptions.
+
+Öğlen Physics: Coulomb, elektrik alan, Gauss, potansiyel, kapasitör, DC, manyetizma, indüksiyon, AC, EM dalga.  
+Soru: 35 mixed final problem, 15 conceptual.  
+Day 45: Solve ALL remaining end-of-chapter problems / lecture-note problems from Physics 2. No exceptions.
+
+Akşam DLD: Number systems, Boolean, K-map, NAND/NOR, combinational, MUX/decoder, latch/flip-flop, sequential design, counters, registers, memory, RTL.  
+Soru: 50 mixed design/analysis.  
+Day 45: Solve ALL remaining end-of-chapter problems from Digital Logic Design. No exceptions.
+
+Gece: Yanlış defteri final turu. Sadece daha önce yanlış yaptığın soruları çöz. Yeni kaynak açma.  
+What you must have mastered today: Üç dersin tamamını bağımsız, süreli ve sınav formatında yönetmek.
+
+**Final Disiplin Kuralı**
+
+Bir konu “bitti” sayılmaz; ancak şu üç koşul sağlanırsa biter: tanımı kitaba bakmadan açıklıyorsun, standart soruyu çözüyorsun, karışık soruda hangi yöntemi seçeceğini biliyorsun.
+
+Bu planın amacı konuları görmek değil, sınavda 90–100 bandına çıkacak kadar tekrar, hız ve hata kontrolü üretmek.
+`;
+
+export default function FullProgram() {
+  return (
+    <div className="min-h-screen premium-bg text-white">
+      <nav className="border-b border-white/5 bg-black/50 backdrop-blur-md sticky top-0 z-50">
+        <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+          <Link href="/">
+            <Button variant="ghost" className="gap-2 hover:bg-red-500/10 hover:text-red-500">
+              <ChevronLeft className="w-4 h-4" />
+              Geri Dön
+            </Button>
+          </Link>
+          <div className="flex items-center gap-2">
+            <FileText className="w-5 h-5 text-red-500" />
+            <h1 className="font-black tracking-tight">TÜM PROGRAM</h1>
+          </div>
+          <Button variant="outline" size="sm" className="border-white/10 gap-2 hover:bg-white/5" onClick={() => window.print()}>
+            <Download className="w-4 h-4" />
+            Yazdır / PDF
+          </Button>
+        </div>
+      </nav>
+
+      <main className="max-w-4xl mx-auto px-4 py-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="premium-card p-8 rounded-3xl"
+        >
+          <pre className="whitespace-pre-wrap font-mono text-sm text-white/80 leading-relaxed">
+            {CONTENT}
+          </pre>
+        </motion.div>
+      </main>
+
+      <footer className="py-8 text-center border-t border-white/5 mt-12">
+        <p className="text-[10px] text-white/20 font-black uppercase tracking-widest">
+          Final Roadmap • Ders Çalışma Programı • Tam Metin
+        </p>
+      </footer>
+    </div>
+  );
+}
