@@ -23,12 +23,13 @@ export const TRACKS = {
   words:   { label:'4000 Essential Words',   icon:'📕', clr:'rose',    series:[{book:'Book 1 (1/3)',units:WD1},{book:'Book 2 (2/3)',units:WD2},{book:'Book 3 (3/3)',units:WD3}] },
   world:   { label:'What A World',           icon:'📙', clr:'amber',   series:[{book:'Book 1',units:W1},{book:'Book 2',units:W2},{book:'Book 3',units:W3}] },
 };
+export type TrackKey = keyof typeof TRACKS;
 
 export const SCH = { oxford:[0,2,3], grammar:[0], words:[1,3], world:[1,2] };
 
-export const totalUnits = (t) => TRACKS[t].series.reduce((s,b) => s + b.units.length, 0);
+export const totalUnits = (t: TrackKey) => TRACKS[t].series.reduce((s, b) => s + b.units.length, 0);
 
-export const baseIdx = (track, day) => {
+export const baseIdx = (track: TrackKey, day: number) => {
   const pos = SCH[track], q = Math.floor(day/4), r = day%4;
   return q * pos.length + pos.filter(p => p < r).length;
 };
@@ -36,12 +37,12 @@ export const baseIdx = (track, day) => {
 export const WORDS_TOTAL = totalUnits('words');
 export const WORLD_TOTAL = totalUnits('world');
 
-export const totalGrammarBefore = (day) =>
+export const totalGrammarBefore = (day: number) =>
   baseIdx('grammar', day)
   + Math.max(0, baseIdx('words', day) - WORDS_TOTAL)
   + Math.max(0, baseIdx('world', day) - WORLD_TOTAL);
 
-export const getUnit = (track, idx) => {
+export const getUnit = (track: TrackKey, idx: number) => {
   let r = idx;
   for (const s of TRACKS[track].series) {
     if (r < s.units.length) return { title: s.units[r][0], cat: s.units[r][1], book: s.book };
@@ -50,13 +51,13 @@ export const getUnit = (track, idx) => {
   return null;
 };
 
-export const activeTracks = (day) =>
-  ['oxford','grammar','words','world'].filter(t => SCH[t].includes(day % 4));
+export const activeTracks = (day: number) =>
+  (Object.keys(TRACKS) as TrackKey[]).filter(t => SCH[t as keyof typeof SCH].includes(day % 4));
 
-export const buildTasks = (day, done) => {
+export const buildTasks = (day: number, done: string[]) => {
   let grUsed = 0;
   return activeTracks(day).map(rawTrack => {
-    let track, idx, bonus;
+    let track: TrackKey, idx: number, bonus: boolean;
     const grIdx = totalGrammarBefore(day) + grUsed;
 
     if (rawTrack === 'grammar') {

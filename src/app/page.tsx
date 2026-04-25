@@ -10,7 +10,6 @@ import {
   Calendar, 
   CheckCircle2, 
   Circle,
-  Flame,
   Zap,
   Clock,
   LayoutDashboard,
@@ -122,10 +121,7 @@ export default function Home() {
             >
               Bugüne Git
             </Button>
-            <div className="hidden md:flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-              <Flame className="w-4 h-4 text-orange-500" />
-              <span className="text-xs font-bold">STREAK: 7</span>
-            </div>
+
             <div className="flex items-center gap-1">
               <Button 
                 variant="ghost" 
